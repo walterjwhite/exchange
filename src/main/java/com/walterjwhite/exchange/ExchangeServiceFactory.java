@@ -1,6 +1,6 @@
 package com.walterjwhite.exchange;
 
-import com.walterjwhite.email.api.model.EmailAccount;
+import com.walterjwhite.email.api.model.PrivateEmailAccount;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import microsoft.exchange.webservices.data.core.ExchangeService;
@@ -13,30 +13,32 @@ public class ExchangeServiceFactory implements Provider<ExchangeService> {
   protected final ExchangeService exchangeService;
 
   @Inject
-  public ExchangeServiceFactory(EmailAccount emailAccount) {
+  public ExchangeServiceFactory(PrivateEmailAccount privateEmailAccount) {
     super();
-    exchangeService = new ExchangeService(getExchangeVersion(emailAccount));
-    exchangeService.setCredentials(getExchangeCredentials(emailAccount));
+    exchangeService = new ExchangeService(getExchangeVersion(privateEmailAccount));
+    exchangeService.setCredentials(getExchangeCredentials(privateEmailAccount));
 
     try {
-      exchangeService.autodiscoverUrl(getExchangeServiceUri(emailAccount));
+      exchangeService.autodiscoverUrl(getExchangeServiceUri(privateEmailAccount));
     } catch (Exception e) {
       throw (new RuntimeException("Error configuring exchange service:", e));
     }
   }
 
-  protected ExchangeCredentials getExchangeCredentials(EmailAccount emailAccount) {
+  protected ExchangeCredentials getExchangeCredentials(PrivateEmailAccount privateEmailAccount) {
     return new WebCredentials(
-        emailAccount.getUsername(), emailAccount.getPassword(), emailAccount.getDomain());
+        privateEmailAccount.getUsername(),
+        privateEmailAccount.getPassword().getPlainText(),
+        privateEmailAccount.getDomain());
   }
 
-  private static String getExchangeServiceUri(EmailAccount emailAccount) {
-    return emailAccount.getProvider().getSettings().get(EXCHANGE_SERVICE_URI_KEY);
+  private static String getExchangeServiceUri(PrivateEmailAccount privateEmailAccount) {
+    return privateEmailAccount.getProvider().getSettings().get(EXCHANGE_SERVICE_URI_KEY);
   }
 
-  private static ExchangeVersion getExchangeVersion(EmailAccount emailAccount) {
+  private static ExchangeVersion getExchangeVersion(PrivateEmailAccount privateEmailAccount) {
     final String value =
-        emailAccount.getProvider().getSettings().get(ExchangeVersion.class.getName());
+        privateEmailAccount.getProvider().getSettings().get(ExchangeVersion.class.getName());
 
     if (value == null || value.isEmpty()) {
       return (ExchangeVersion.Exchange2010_SP2);
