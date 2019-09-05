@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.walterjwhite.java</groupId>
     <artifactId>modules</artifactId>
-    <version>0.0.15-SNAPSHOT</version>
+    <version>0.0.17-SNAPSHOT</version>
   </parent>
   <groupId>com.walterjwhite.java.modules</groupId>
   <artifactId>exchange</artifactId>
@@ -14,12 +14,12 @@
     <dependency>
       <groupId>com.walterjwhite.java.modules.email.api</groupId>
       <artifactId>model</artifactId>
-      <version>0.0.15-SNAPSHOT</version>
+      <version>0.0.17-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.walterjwhite.java.dependencies</groupId>
       <artifactId>ews-java-api</artifactId>
-      <version>0.0.15-SNAPSHOT</version>
+      <version>0.0.17-SNAPSHOT</version>
       <type>pom</type>
     </dependency>
     <!--<dependency>-->
@@ -35,17 +35,18 @@
     <dependency>
       <groupId>com.walterjwhite.java.modules.encryption</groupId>
       <artifactId>api</artifactId>
-      <version>0.0.15-SNAPSHOT</version>
+      <version>0.0.17-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.walterjwhite.java.modules.file.api</groupId>
       <artifactId>service</artifactId>
-      <version>0.0.15-SNAPSHOT</version>
+      <version>0.0.17-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <scm>
     <connection>scm:git:ssh://git@localhost:/projects/active/github.com/walterjwhite/exchange.git</connection>
     <developerConnection>scm:git:ssh://git@localhost:/projects/active/github.com/walterjwhite/exchange.git</developerConnection>
     <url>https://github.com/walterjwhite/exchange.git</url>
+    <tag>java-0.0.16</tag>
   </scm>
 </project>
