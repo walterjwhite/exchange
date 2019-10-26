@@ -21,7 +21,7 @@ public class ExchangeServiceFactory implements Provider<ExchangeService> {
     try {
       exchangeService.autodiscoverUrl(getExchangeServiceUri(privateEmailAccount));
     } catch (Exception e) {
-      throw (new RuntimeException("Error configuring exchange service:", e));
+      throw new RuntimeException("Error configuring exchange service:", e);
     }
   }
 
